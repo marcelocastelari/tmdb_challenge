@@ -7,7 +7,7 @@ export class AuthService implements IAuth {
         console.log(username);
         const existingUser = await UserRepository.findByUsername(username);
         if(existingUser) {
-            return "User already exists";
+            throw new Error("User already exists");
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -18,12 +18,12 @@ export class AuthService implements IAuth {
     async login(username: string, password: string): Promise<string> {
         const user = await UserRepository.findByUsername(username);
         if (!user) {
-            return "User not found";
+            throw new Error("User not found");
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if(!isPasswordValid) {
-            return "Invalid username or password";
+            throw new Error("Invalid credentials"); 
         }
         return "Login successful";
     }

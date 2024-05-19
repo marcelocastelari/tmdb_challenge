@@ -13,7 +13,8 @@ export class AuthController {
             const message = await this.authService.register(username, password);
             return { status: 201, message }
         } catch (error) {
-            return { status: 500, message: error }
+            console.log(error)
+            return { status: 400, message: error }
         }
     }
 

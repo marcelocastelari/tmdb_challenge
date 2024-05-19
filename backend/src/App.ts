@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { AuthController } from './controllers/AuthController';
 
 const app = express();
@@ -8,6 +9,7 @@ const authController = new AuthController();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
