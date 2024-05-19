@@ -20,12 +20,12 @@ export class UserRepository {
         }
     }
 
-    static async findByUsername(username: string): Promise<UserModel | null> {
+    static async findByEmail(email: string): Promise<UserModel | null> {
         try {
-            const user = await UserModel.findOne({ where: { username } });
+            const user = await UserModel.findOne({ where: { email } });
             return user;
         } catch (error) {
-            throw new Error(`Error on find user by username ${error}`)
+            throw new Error(`Error on find user by email ${error}`)
         }
     }
 

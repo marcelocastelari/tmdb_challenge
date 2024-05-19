@@ -1,10 +1,10 @@
-import { Sequelize, Model, DataTypes } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import { IUser } from "../interfaces/UserInterface";
 import { sequelize } from "../../config/database"; 
 
 export class UserModel extends Model<IUser> implements IUser {
     public id!: number;
-    public username!: string;
+    public email!: string;
     public password!: string;
 
     public readonly createdAt!: Date;
@@ -18,7 +18,7 @@ UserModel.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        username: {
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
         },

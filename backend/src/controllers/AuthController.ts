@@ -7,21 +7,19 @@ export class AuthController {
         this.authService = new AuthService();
     }
 
-    async register(username: string, password: string) {
+    async register(email: string, password: string) {
         try {
-            console.log(username);
-            const message = await this.authService.register(username, password);
+            const message = await this.authService.register(email, password);
             return { status: 201, message }
         } catch (error) {
-            console.log(error)
             return { status: 400, message: error }
         }
     }
 
-    async login(username: string, password: string) {
+    async login(email: string, password: string) {
         try {
-            const message = await this.authService.login(username, password);
-            return { status: 200, message };
+            const result = await this.authService.login(email, password);
+            return { status: 200, token: result };
         } catch (error) {
           return { status: 500, message: error };  
         }
