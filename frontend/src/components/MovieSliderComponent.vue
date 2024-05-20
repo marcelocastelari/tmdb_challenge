@@ -1,7 +1,10 @@
 <template>
   <div class="p-10">
     <h2 class="text-white text-2xl underline underline-offset-8 decoration-yellow-500">{{ title }}</h2>
-    <div class="flex flex-wrap mt-10 w-full">
+    <div v-if="!movies.length">
+      <p class="text-white mt-5">Ainda não foi adicionado nenhum filme.</p>
+    </div>
+    <div class="flex flex-wrap mt-10 w-full" v-else>
       <div v-for="movie in movies" :key="movie.id" class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/6 p-1">
         <div @click="handleClick(movie)" class="bg-white rounded-lg shadow-md cursor-pointer">
           <img :src="getMoviePosterUrl(movie.poster_path)" alt="Movie Poster" class="w-full h-96 rounded-t-lg object-cover" />
@@ -11,6 +14,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 

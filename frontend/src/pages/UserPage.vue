@@ -2,10 +2,9 @@
   <div>
     <HeaderComponent />
     <main>
-      <div class=" bg-neutral-900 flex flex-col items-center justify-center h-full">
-          <div class="px-4 md:px-5">
+      <div class="h-screen min-h-screen flex flex-col md:py-20 bg-neutral-900 overflow-y-auto">
+        <div class="px-4 md:px-5">
             <div class="max-w-6xl mx-auto text-center text-yellow-500">
-              <h1 class="text-3xl md:text-6xl font-black tracking-tight">Encontre seu filme favorito</h1>
               <div class="flex mx-auto items-center mt-10">
                 <span class="relative inline-block mx-auto w-2/3">
                   <input
@@ -28,17 +27,16 @@
               </div>
             </div>
           </div>
-        </div>
-      <div class="md:py-20 bg-neutral-900 overflow-y-auto">
-        <h1 class="flex justify-center text-3xl text-yellow-400 font-semibold my-8">Seus Filmes</h1>
-        <MovieSlider title="Favoritos" :movies="favoriteMovies" @movie-clicked="openModal" />
-        <MovieSlider title="Assistir Mais Tarde" :movies="watchLaterMovies" @movie-clicked="openModal" />
-        <MovieSlider title="Assistidos" :movies="watchedMovies" @movie-clicked="openModal" />
+          <div class="py-10 bg-neutral-900">
+            <h1 class="flex justify-center text-3xl text-yellow-400 font-semibold my-8">Seus Filmes</h1>
+            <MovieSlider title="Favoritos" :movies="favoriteMovies" @movie-clicked="openModal" />
+            <MovieSlider title="Assistir Mais Tarde" :movies="watchLaterMovies" @movie-clicked="openModal" />
+            <MovieSlider title="Assistidos" :movies="watchedMovies" @movie-clicked="openModal" />
+          </div>
       </div>
     </main>
-
     <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div class="bg-white p-6 rounded-lg w-3/4 max-w-4xl relative modal-content"> <!-- Aumentei para w-3/4 max-w-4xl -->
+      <div class="bg-white p-6 rounded-lg w-3/4 max-w-4xl relative modal-content"> 
         <button @click="closeModal" class="absolute top-2 right-2 bg-yellow-500 text-black font-bold rounded-full w-8 h-8 flex items-center justify-center modal-close-button">x</button>
         <div class="flex flex-col">
           <div class="flex mb-4">
@@ -60,6 +58,7 @@
 </template>
 
 <script setup>
+/* eslint-disable */
 import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
@@ -108,6 +107,11 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
+* {
+  margin: 0;
+}
+
 .modal-content {
   width: 75%;
   max-width: 1024px;
