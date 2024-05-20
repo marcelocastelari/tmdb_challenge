@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import authRoutes from './routes/AuthRoutes';
-import userMovieListRoutes from './routes/UserMovieListRoutes';
+import authRoutes from './main/routes/AuthRoutes';
+import userMovieListRoutes from './main/routes/UserMovieListRoutes';
 
 const app = express();
 const port = 8000;

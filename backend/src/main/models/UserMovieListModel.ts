@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../../config/database"; 
+import { sequelize } from "../../../config/database"; 
 import { UserModel } from "./UserModel";
 import { MovieModel } from "./MovieModel";
 import { IUserMovieList } from "../interfaces/UserMovieListInterface";

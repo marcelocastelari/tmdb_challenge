@@ -1,6 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 import { IUser } from "../interfaces/UserInterface";
-import { sequelize } from "../../config/database"; 
+import { sequelize } from "../../../config/database"; 
 
 export class UserModel extends Model<IUser> implements IUser {
     public id!: number;

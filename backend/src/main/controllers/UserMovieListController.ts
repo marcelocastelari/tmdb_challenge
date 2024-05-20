@@ -15,7 +15,6 @@ export class UserMovieListController {
             const message = await UserMovieListService.addMovieToList(userId, movie, listType);
             res.status(200).json({ message });
         } catch (error) {
-            console.log(error)
             res.status(500).json({ error: error });
         }
     }

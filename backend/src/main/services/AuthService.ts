@@ -23,7 +23,6 @@ export class AuthService  {
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if(!isPasswordValid) {
-            console.log('caiu aqui');
             throw new Error("Invalid credentials"); 
         }
         const token = jwt.sign({ userId: user.id }, "secret", { expiresIn: "1h" });
