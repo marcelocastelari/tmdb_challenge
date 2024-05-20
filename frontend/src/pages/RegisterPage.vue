@@ -55,8 +55,6 @@ const notifyError = (message) => {
 
 const register = async() => {
     try {
-        console.log(email.value);
-        console.log(password.value);
         const response = await fetch('http://localhost:8000/auth/register', {
             method: 'POST',
             headers: {

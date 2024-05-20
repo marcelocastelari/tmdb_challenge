@@ -48,7 +48,6 @@
       password: password.value
     });
 
-    console.log(success)
   
     if (success) {
       email.value = '';
