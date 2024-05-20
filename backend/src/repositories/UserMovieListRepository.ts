@@ -9,7 +9,11 @@ export class UserMovieListRepository {
         await UserMovieListModel.destroy({ where: { userId, movieId, listType } });
     }
 
-    static async getMoviesByList(userId: number, listType: string): Promise<UserMovieListModel[]> {        
-        return UserMovieListModel.findAll({ where: { userId, listType } });
+    static async getMoviesByList(userId: number, listType: string): Promise<number[]> {
+        const userMovieList = await UserMovieListModel.findAll({
+            where: { userId, listType },
+            attributes: ['movieId']
+        });
+        return userMovieList.map(record => record.movieId);
     }
 }

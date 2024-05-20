@@ -47,8 +47,8 @@ export class UserMovieListController {
         const { listType } = req.params;
 
         try {
-            const movies = await UserMovieListService.getMoviesByList(userId, listType);
-            res.status(200).json({ movies });
+            const movieId = await UserMovieListService.getMoviesByList(userId, listType);
+            res.status(200).json(movieId);
         } catch (error) {
             res.status(500).json({ error: error });
         }
