@@ -3,5 +3,12 @@ export default {
     loading: false,
     favorites: [],
     watchLater: [],
-    watched: []
+    watched: [],
+    listType: [
+        {
+            favorite: [],
+            watchLater: [],
+            watched: []
+        }
+    ]
 }

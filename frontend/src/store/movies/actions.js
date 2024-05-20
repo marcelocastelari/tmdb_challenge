@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDRhM2Q0ODE4OWY5NTU5YWU1ZmY3OTY3ODY0ZWI2NiIsInN1YiI6IjY2NDkzM2I1M2Y0NGRjNWUzNzc4YzQ4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tTIkGGKZfD6MjDdypKUPNxU8K2qycT9f67zbbsoKKwQ'
+
 const getJwt = () => {
   const jwt = localStorage.getItem('token');
   if (jwt) {
@@ -8,6 +9,15 @@ const getJwt = () => {
   }
   return null;
 }
+
+const getMovieDetails = (movieIds) => movieIds.map(async (id) => {
+  const movieResponse = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+    headers: {
+      Authorization: `Bearer ${API_KEY}`
+    }
+  });
+  return movieResponse.data;
+});
 
 export default {
       async fetchMovies({ commit }, query) {
@@ -83,23 +93,29 @@ export default {
         commit('removeFromWatched', movieId);
       },
 
-      async getMoviesByList({ commit }, listType) {
+      async getMoviesByList({ commit }) {
+        const listTypes = ['favorite', 'watched', 'watchLater'];
         try {
-          commit('markAsWatched', data);
           const token = getJwt();
-          const { id, title, poster_path, release_date } = data;
-          const movie = { id, title, posterPath: poster_path, releaseDate:release_date };
-
           const config = { headers: { Authorization: `Bearer ${token}` } };
-          const response = await axios.get('http://localhost:8000/userMovieList/add', {
-            params: {
-              query
-            }
-          }, config)
-          return response.data;
+      
+          const promises = listTypes.map(async (listType) => {
+            const response = await axios.get(`http://localhost:8000/userMovieList/${listType}`, config);
+            const movieIds = response.data;
+      
+            const movieDetailsPromises = getMovieDetails(movieIds)
+            const movies = await Promise.all(movieDetailsPromises);
+      
+            return { listType, movies };
+          });
+      
+          const results = await Promise.all(promises);
+      
+          results.forEach(({ listType, movies }) => {
+            commit('setListType', { listType, movies });
+          });
         } catch (error) {
-          return error;
+          console.error('Error fetching movies by list:', error);
         }
-        
-      }
+      },
 }

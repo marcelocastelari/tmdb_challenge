@@ -37,5 +37,8 @@ export default {
         if (index !== -1) {
           state.watched.splice(index, 1);
         }
-      }
+      },
+      setListType(state, { listType, movies }) {
+        state.listType[listType] = movies;
+      },
 }
