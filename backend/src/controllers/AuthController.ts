@@ -1,27 +1,27 @@
+import { Request, Response } from "express";
 import { AuthService } from "../services/AuthService";
 
 export class AuthController {
-    private authService: AuthService;
-
-    constructor() {
-        this.authService = new AuthService();
-    }
-
-    async register(email: string, password: string) {
+ 
+    static async register(req: Request, res: Response): Promise<void> {
+        const { email, password } = req.body;
         try {
-            const message = await this.authService.register(email, password);
-            return { status: 201, message }
+            const message = await AuthService.register(email, password);
+            res.status(201).json({ message });
         } catch (error) {
-            return { status: 400, message: error }
+            res.status(400).json({ error });
         }
     }
 
-    async login(email: string, password: string) {
+    static async login(req: Request, res: Response): Promise<void> {
+        const { email, password } = req.body;
         try {
-            const result = await this.authService.login(email, password);
-            return { status: 200, token: result };
+            const result = await AuthService.login(email, password);
+            res.status(200).json({ token: result });
+            console.log(result);
         } catch (error) {
-          return { status: 500, message: error };  
+            console.log(error);
+            res.status(401).json({ error });
         }
     }
 }

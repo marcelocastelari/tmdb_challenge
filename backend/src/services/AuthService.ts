@@ -3,8 +3,8 @@ import { UserRepository } from "../repositories/UserRepository";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 
-export class AuthService implements IAuth {
-    async register(email: string, password: string): Promise<string> {
+export class AuthService  {
+    static async register(email: string, password: string): Promise<string> {
         const existingUser = await UserRepository.findByEmail(email);
         if(existingUser) {
             throw new Error("User already exists");
@@ -15,7 +15,7 @@ export class AuthService implements IAuth {
         return "User registered successfully";
     }
 
-    async login(email: string, password: string): Promise<string> {
+    static async login(email: string, password: string): Promise<string> {
         const user = await UserRepository.findByEmail(email);
         if (!user) {
             throw new Error("User not found");
@@ -23,6 +23,7 @@ export class AuthService implements IAuth {
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if(!isPasswordValid) {
+            console.log('caiu aqui');
             throw new Error("Invalid credentials"); 
         }
         const token = jwt.sign({ userId: user.id }, "secret", { expiresIn: "1h" });
