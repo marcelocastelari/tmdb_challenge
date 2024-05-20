@@ -8,17 +8,20 @@ export default {
             password
           });
     
+          console.log(response.status)
           if (response.status !== 200) {
             throw new Error('Error');
           }
           
           const token = response.data.token;
           localStorage.setItem('token', token);
+
     
           commit('setLogged', true);
           commit('setUserDetails', response.data.user);
           return true;
         } catch (error) {
+          console.log(error);
           commit('setLogged', false);
           return false;
         }

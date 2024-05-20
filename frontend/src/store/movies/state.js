@@ -4,11 +4,11 @@ export default {
     favorites: [],
     watchLater: [],
     watched: [],
-    listType: [
-        {
-            favorite: [],
-            watchLater: [],
-            watched: []
-        }
-    ]
+    listType:
+    {
+        favorite: [],
+        watchLater: [],
+        watched: []
+    }
+    
 }

@@ -10,6 +10,20 @@ const getJwt = () => {
   return null;
 }
 
+const getMovieCredits = (id) => {
+  const credits = axios.get(`https://api.themoviedb.org/3/movie/${id}/credits`, {
+    headers: {
+      Authorization: `Bearer ${API_KEY}`
+    }
+  });
+  return credits;
+}
+
+const getMovieDirector = (movie) => {
+  const director = movie.credits.crew.find((crewMember) => crewMember.job === 'Director');
+  return director ? director.name : 'Unknown Director';
+}
+
 const getMovieDetails = (movieIds) => movieIds.map(async (id) => {
   const movieResponse = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
     headers: {
@@ -103,8 +117,15 @@ export default {
             const response = await axios.get(`http://localhost:8000/userMovieList/${listType}`, config);
             const movieIds = response.data;
       
-            const movieDetailsPromises = getMovieDetails(movieIds)
+            const movieDetailsPromises = getMovieDetails(movieIds);
             const movies = await Promise.all(movieDetailsPromises);
+      
+            for (let movie of movies) {
+              const creditsResponse = await getMovieCredits(movie.id);
+              movie.credits = creditsResponse.data;
+      
+              movie.director = getMovieDirector(movie);
+            }
       
             return { listType, movies };
           });
