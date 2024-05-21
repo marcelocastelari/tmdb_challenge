@@ -8,7 +8,6 @@ export class UserMovieListController {
             res.status(401).json({ error: 'Token de autenticação inválido' });
             return;
         }
-
         const { movie, listType } = req.body;
 
         try {
@@ -26,10 +25,10 @@ export class UserMovieListController {
             return;
         }
 
-        const { movie, listType } = req.body;
+        const { movieId, listType } = req.body;
 
         try {
-            const message = await UserMovieListService.removeMovieFromList(userId, movie, listType);
+            const message = await UserMovieListService.removeMovieFromList(userId, movieId, listType);
             res.status(200).json({ message });
         } catch (error) {
             res.status(500).json({ error: error });

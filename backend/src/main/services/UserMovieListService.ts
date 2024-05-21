@@ -1,12 +1,11 @@
 import { MovieRepository } from "../repositories/MovieRepository";
 import { UserMovieListRepository } from "../repositories/UserMovieListRepository";
 import { MovieModel } from "../models/MovieModel";
-import { UserMovieListModel } from "../models/UserMovieListModel";
 
 export class UserMovieListService {
     static async addMovieToList(userId: number, movieData: Partial<MovieModel>, listType: string): Promise<string> {
-        const movie = await MovieRepository.createOrUpdate(movieData);
         
+        const movie = await MovieRepository.createOrUpdate(movieData);
         await UserMovieListRepository.addMovieToList(userId, movie.id, listType);
         return "Movie added to list";
     }

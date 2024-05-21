@@ -31,18 +31,26 @@ export class UserRepository {
 
     static async updateUser(userId: number, userData: Partial<IUser>): Promise<void> {
         try {
-            await UserModel.update(userData, { where: { id: userId } })
+            const [rowsUpdated] = await UserModel.update(userData, { where: { id: userId } });
+            if (rowsUpdated === 0) {
+                throw new Error(`User with ID ${userId} not found`);
+            }
         } catch (error) {
-            throw new Error(`Error on update user ${error}`)
+            throw new Error(`Error on update user ${error}`);
         }
     }
+    
 
     static async deleteUser(userId: number): Promise<void> {
         try {
-            await UserModel.destroy({ where: { id: userId } })
+            const rowsDeleted = await UserModel.destroy({ where: { id: userId } });
+            if (rowsDeleted === 0) {
+                throw new Error(`User with ID ${userId} not found`);
+            }
         } catch (error) {
-            throw new Error(`Error on delete user ${error}`)
+            throw new Error(`Error on delete user ${error}`);
         }
     }
+    
 
 }
