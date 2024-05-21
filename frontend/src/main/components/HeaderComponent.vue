@@ -5,10 +5,10 @@
         <div>Movies Finder</div>
         <div class="flex items-center">
           <div class="items-center space-x-4 hidden sm:flex">
-              <button @click="handleButtonClick" class="inline-flex items-center justify-center focus:outline-none transition ease-in-out duration-1000 hover:duration-300 font-semibold rounded-lg text-neutral-800 bg-yellow-500 hover:bg-yellow-500 hover:shadow-lg hover:shadow-yellow-500/50 text-base px-4 h-10">
+              <button id="userButton" @click="handleButtonClick" class="inline-flex items-center justify-center focus:outline-none transition ease-in-out duration-1000 hover:duration-300 font-semibold rounded-lg text-neutral-800 bg-yellow-500 hover:bg-yellow-500 hover:shadow-lg hover:shadow-yellow-500/50 text-base px-4 h-10">
                 <i :class="iconClass"></i>
               </button>
-              <button @click="logout" class="text-sm text-white font-bold hover:underline">Sair</button>
+              <button id="logoutButton" @click="logout" class="text-sm text-white font-bold hover:underline">Sair</button>
           </div>
         </div>
       </div>

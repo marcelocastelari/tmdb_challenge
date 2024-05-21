@@ -137,6 +137,6 @@ const markAsWatched = async () => {
 }
 
 .active {
-  color: #ffcc00; /* Cor amarela */
+  color: #ffcc00;
 }
 </style>

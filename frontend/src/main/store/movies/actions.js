@@ -48,8 +48,8 @@ export default {
           commit('setMovies', response.data.results);
           commit('setLoading', false);
         } catch (error) {
-          console.error('Erro ao buscar filmes:', error);
           commit('setLoading', false);
+          return error;
         }
       },
       async addToFavorites({ commit }, data) {
@@ -136,7 +136,7 @@ export default {
             commit('setListType', { listType, movies });
           });
         } catch (error) {
-          console.error('Error fetching movies by list:', error);
+          return error;
         }
       },
 }
