@@ -8,7 +8,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Endpoint de teste para usar o middleware
 app.get('/test', authMiddleware, (req: Request, res: Response) => {
     res.sendStatus(200);
 });

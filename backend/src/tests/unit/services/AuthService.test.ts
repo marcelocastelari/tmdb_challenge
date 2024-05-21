@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 jest.mock('../../../main/repositories/UserRepository');
+
 jest.mock('bcrypt');
 jest.mock('jsonwebtoken');
 
@@ -20,7 +21,7 @@ describe('AuthService', () => {
             (UserRepository.findByEmail as jest.Mock).mockResolvedValue(null);
             (bcrypt.hash as jest.Mock).mockResolvedValue('hashedPassword');
             (UserRepository.createUser as jest.Mock).mockResolvedValue({});
-
+            
             const result = await AuthService.register(email, password);
 
             expect(UserRepository.findByEmail).toHaveBeenCalledWith(email);

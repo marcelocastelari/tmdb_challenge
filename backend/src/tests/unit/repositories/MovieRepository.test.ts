@@ -8,10 +8,8 @@ describe('MovieRepository', () => {
         it('should create or update a movie successfully', async () => {
             const movieData = { title: 'Inception', year: 2010 };
 
-            // Mock implementation for MovieModel.upsert
             (MovieModel.upsert as jest.Mock).mockResolvedValueOnce([movieData]);
 
-            // Assertions
             const result = await MovieRepository.createOrUpdate(movieData);
             expect(result).toEqual(movieData);
         });
@@ -20,10 +18,8 @@ describe('MovieRepository', () => {
             const movieData = { title: 'Inception', year: 2010 };
             const errorMessage = 'Database error';
 
-            // Mock implementation for MovieModel.upsert to throw an error
             (MovieModel.upsert as jest.Mock).mockRejectedValueOnce(new Error(errorMessage));
 
-            // Assertions
             await expect(MovieRepository.createOrUpdate(movieData)).rejects.toThrowError(errorMessage);
         });
     });
@@ -33,10 +29,8 @@ describe('MovieRepository', () => {
             const movieId = 101;
             const movieData = { id: movieId, title: 'Inception', year: 2010 };
 
-            // Mock implementation for MovieModel.findByPk
             (MovieModel.findByPk as jest.Mock).mockResolvedValueOnce(movieData);
 
-            // Assertions
             const result = await MovieRepository.findById(movieId);
             expect(result).toEqual(movieData);
         });
@@ -44,10 +38,8 @@ describe('MovieRepository', () => {
         it('should return null when movie is not found', async () => {
             const movieId = 101;
 
-            // Mock implementation for MovieModel.findByPk to return null
             (MovieModel.findByPk as jest.Mock).mockResolvedValueOnce(null);
 
-            // Assertions
             const result = await MovieRepository.findById(movieId);
             expect(result).toBeNull();
         });
@@ -56,10 +48,8 @@ describe('MovieRepository', () => {
             const movieId = 101;
             const errorMessage = 'Database error';
 
-            // Mock implementation for MovieModel.findByPk to throw an error
             (MovieModel.findByPk as jest.Mock).mockRejectedValueOnce(new Error(errorMessage));
 
-            // Assertions
             await expect(MovieRepository.findById(movieId)).rejects.toThrowError(errorMessage);
         });
     });
