@@ -1,5 +1,6 @@
 import { IAuth } from "../interfaces/AuthInterface";
 import { UserRepository } from "../repositories/UserRepository";
+import { UserAlreadyExistsError } from "../utils/UserAlreadyExistsError";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 
@@ -7,7 +8,7 @@ export class AuthService  {
     static async register(email: string, password: string): Promise<string> {
         const existingUser = await UserRepository.findByEmail(email);
         if(existingUser) {
-            throw new Error("User already exists");
+            throw new UserAlreadyExistsError("User already exists");
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);

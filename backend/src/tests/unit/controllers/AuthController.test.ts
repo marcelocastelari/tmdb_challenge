@@ -40,7 +40,7 @@ describe('AuthController', () => {
             await AuthController.register(req as Request, res as Response);
 
             expect(res.status).toHaveBeenCalledWith(400);
-            expect(res.json).toHaveBeenCalledWith({ error: 'Error registering user' });
+            expect(res.json).toHaveBeenCalledWith({ error: 'An unknown error occurred' });
         });
     });
 
@@ -67,7 +67,7 @@ describe('AuthController', () => {
             await AuthController.login(req as Request, res as Response);
 
             expect(res.status).toHaveBeenCalledWith(401);
-            expect(res.json).toHaveBeenCalledWith({ error: 'Invalid credentials' });
+            expect(res.json).toHaveBeenCalledWith({ error: 'An unknown error occurred' });
         });
     });
 });

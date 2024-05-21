@@ -36,8 +36,8 @@ describe('AuthService Integration Tests', () => {
                 .post('/auth/register')
                 .send({ email: 'test@example.com', password: 'password123' });
 
-            expect(res.status).toBe(400);
-            expect(res.body).toEqual({ error: {} });
+            expect(res.status).toBe(409);
+            expect(res.body).toEqual({ error: "User already exists" });
         });
     });
 
@@ -62,7 +62,7 @@ describe('AuthService Integration Tests', () => {
                 .send({ email: 'test@example.com', password: 'wrongpassword' });
 
             expect(res.status).toBe(401);
-            expect(res.body).toEqual({ error: {} });
+            expect(res.body).toEqual({ error: "Invalid credentials" });
         });
 
         it('should not login a non-existent user', async () => {
@@ -71,7 +71,7 @@ describe('AuthService Integration Tests', () => {
                 .send({ email: 'nonexistent@example.com', password: 'password123' });
 
             expect(res.status).toBe(401);
-            expect(res.body).toEqual({ error: {} });
+            expect(res.body).toEqual({ error: "User not found" });
         });
     });
 });
