@@ -21,7 +21,7 @@
                     </svg>
                   </div>
                   <div class="md:absolute md:inset-y-0 md:right-0 md:flex items-center md:pr-2">
-                    <button @click="searchMovies" class="w-full inline-flex items-center justify-center focus:outline-none transition ease-in-out duration-1000 hover:duration-300 font-semibold rounded-lg text-neutral-800 bg-yellow-500 hover:bg-yellow-500 hover:shadow-lg hover:shadow-yellow-500/50 text-base px-4 h-10">
+                    <button id="searchButton" @click="searchMovies" class="w-full inline-flex items-center justify-center focus:outline-none transition ease-in-out duration-1000 hover:duration-300 font-semibold rounded-lg text-neutral-800 bg-yellow-500 hover:bg-yellow-500 hover:shadow-lg hover:shadow-yellow-500/50 text-base px-4 h-10">
                       Buscar
                     </button>
                   </div>
@@ -46,7 +46,7 @@ import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import HeaderComponent from '../components/HeaderComponent.vue';
 import MovieCard from '../components/MovieCardComponent.vue';
-import LoadingComponent from '@/components/LoadingComponent.vue';
+import LoadingComponent from '../components/LoadingComponent.vue';
 import { toast } from 'vue3-toastify'
 
 

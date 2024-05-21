@@ -8,6 +8,7 @@
               <input v-model="email" type="email" placeholder="Email" class="input h-11 rounded pl-2 w-full lg:w-96"><br>
               <input v-model="password" type="password" placeholder="Senha" class="input h-11 mt-7 mb-6 rounded pl-2 w-full lg:w-96"><br>
               <button
+                id="login"
                 class="inline-flex items-center justify-center focus:outline-none transition ease-in-out duration-1000 hover:duration-300 font-semibold rounded-lg text-neutral-800 bg-yellow-400 hover:bg-yellow-500 hover:shadow-lg hover:shadow-yellow-500/50 md:text-lg md:h-16 h-12 w-full lg:w-96">
                 Entrar
               </button>
@@ -30,7 +31,6 @@
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import { useStore } from 'vuex';
-  import "vue3-toastify/dist/index.css";
   import { toast } from 'vue3-toastify';
   
   const email = ref('');

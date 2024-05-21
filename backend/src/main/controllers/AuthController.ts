@@ -1,5 +1,3 @@
-// AuthController.ts
-
 import { Request, Response } from "express";
 import { AuthService } from "../services/AuthService";
 import { UserAlreadyExistsError } from "../utils/UserAlreadyExistsError";

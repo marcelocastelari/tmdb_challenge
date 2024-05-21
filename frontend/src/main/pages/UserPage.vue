@@ -27,11 +27,14 @@
               </div>
             </div>
           </div>
-          <div class="py-10 bg-neutral-900">
+          <div class="py-10 bg-neutral-900" v-if="!isLoading">
             <h1 class="flex justify-center text-3xl text-yellow-400 font-semibold my-8">Seus Filmes</h1>
             <MovieSlider title="Favoritos" :movies="favoriteMovies" @movie-clicked="openModal" />
             <MovieSlider title="Assistir Mais Tarde" :movies="watchLaterMovies" @movie-clicked="openModal" />
             <MovieSlider title="Assistidos" :movies="watchedMovies" @movie-clicked="openModal" />
+          </div>
+          <div class="py-32" v-else>
+            <LoadingComponent backgroundColor="" spinnerSize="4rem" />
           </div>
       </div>
     </main>
@@ -62,9 +65,10 @@
 import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import HeaderComponent from '@/components/HeaderComponent.vue';
-import MovieSlider from '@/components/MovieSliderComponent.vue';
-import MovieDetailComponent from '@/components/MovieDetailComponent.vue'
+import HeaderComponent from '../components/HeaderComponent.vue';
+import MovieSlider from '../components/MovieSliderComponent.vue';
+import MovieDetailComponent from '../components/MovieDetailComponent.vue'
+import LoadingComponent from '../components/LoadingComponent.vue';
 
 const store = useStore();
 const router = useRouter();
@@ -72,6 +76,7 @@ const query = ref('')
 const favoriteMovies = computed(() => store.getters['movies/getFavorites']);
 const watchLaterMovies = computed(() => store.getters['movies/getWatchLater']);
 const watchedMovies = computed(() => store.getters['movies/getWatched']);
+const isLoading = computed(() => store.getters['movies/getLoading'])
 
 const showModal = ref(false);
 const selectedMovie = ref(null);

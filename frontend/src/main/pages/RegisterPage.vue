@@ -9,6 +9,7 @@
                         <input v-model="password" type="password" placeholder="Senha" class="input h-11 mt-7 mb-6 rounded pl-2 w-full lg:w-96">
                         <br>
                         <button
+                            id="register"
                             class="inline-flex items-center justify-center focus:outline-none transition ease-in-out duration-1000 hover:duration-300 font-semibold rounded-lg text-neutral-800 bg-yellow-400 hover:bg-yellow-500 hover:shadow-lg hover:shadow-yellow-500/50 md:text-lg md:h-16 h-12 w-full lg:w-96">
                             Criar conta
                         </button>
@@ -17,7 +18,7 @@
                         </div>
                         <button
                             class="button-g md:h-16 mt-10 h-12 rounded bg-neutral-800 text-white md:text-lg w-full lg:w-96"
-                            @click="this.$router.push('/login')"
+                            @click="this.$router.push('/')"
                             >
                             Entrar
                         </button>
@@ -30,12 +31,14 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'
-import { toast } from 'vue3-toastify'
+import { useRouter } from 'vue-router';
+import { toast } from 'vue3-toastify';
+import { useStore } from 'vuex';
 
 let email = ref('');
 let password = ref('');
 const router = useRouter();
+const store = useStore();
 
 const redirect = (endpoint) => {
     setTimeout(() => {
@@ -45,8 +48,8 @@ const redirect = (endpoint) => {
     }, 2500)
 }
 
-const notifySuccess = () => {
-    toast.info('Cadastro realizado! Redirecinando para login', { autoClose: 2000 });
+const notifySuccess = (message) => {
+    toast.info(message);
 };
 
 const notifyError = (message) => {
@@ -55,32 +58,18 @@ const notifyError = (message) => {
 
 const register = async() => {
     try {
-        const response = await fetch('http://localhost:8000/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email.value,
-                password: password.value
-            })
-        })
-
-        if(!response.ok) {
-            throw new Error('Error')
+        const success = await store.dispatch('user/register', { email: email.value, password: password.value });
+        if (success) {
+            email.value = '';
+            password.value = '';
+            notifySuccess('Cadastro realizado! Redirecionando para o login');
+            redirect('/');
         }
-
-        email.value = '';
-        password.value = '';
-        notifySuccess();
-        redirect('/')
-
     } catch (error) {
-        email.value = '';
-        password.value = '';
-        notifyError('Erro ao cadastrar usuário');
+        notifyError(error.message);
     }
 }
+
 
 </script>
 
