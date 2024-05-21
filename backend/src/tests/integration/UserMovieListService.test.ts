@@ -89,7 +89,6 @@ describe('UserMovieListRepository', () => {
                 .delete(`/userMovieList/remove`)
                 .set('Authorization', `Bearer ${token}`)
                 .send({ movieId: 2658, listType });
-            console.log('response', res.body)
 
             expect(add.status).toBe(200)
             expect(res.status).toBe(200);
