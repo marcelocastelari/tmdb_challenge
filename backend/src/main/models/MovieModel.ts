@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from "../../../config/database"; 
+import sequelize from "../../../config/database"; 
 import { IMovie } from '../interfaces/MovieInterface';
 
 export class MovieModel extends Model<IMovie> implements IMovie {
