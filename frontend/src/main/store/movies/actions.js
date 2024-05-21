@@ -108,6 +108,7 @@ export default {
       },
 
       async getMoviesByList({ commit }) {
+        commit('setLoading', true);
         const listTypes = ['favorite', 'watched', 'watchLater'];
         try {
           const token = getJwt();
@@ -135,7 +136,9 @@ export default {
           results.forEach(({ listType, movies }) => {
             commit('setListType', { listType, movies });
           });
+          commit('setLoading', false);
         } catch (error) {
+          commit('setLoading', false);
           return error;
         }
       },
