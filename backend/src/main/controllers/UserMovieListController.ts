@@ -29,7 +29,7 @@ export class UserMovieListController {
         const { movie, listType } = req.body;
 
         try {
-            const message = await UserMovieListService.addMovieToList(userId, movie, listType);
+            const message = await UserMovieListService.removeMovieFromList(userId, movie, listType);
             res.status(200).json({ message });
         } catch (error) {
             res.status(500).json({ error: error });

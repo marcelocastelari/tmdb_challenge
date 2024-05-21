@@ -14,6 +14,8 @@ app.use(cors());
 app.use('/auth', authRoutes);
 app.use('/userMovieList', userMovieListRoutes);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
+
+export default server;
