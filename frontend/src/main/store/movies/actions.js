@@ -36,11 +36,13 @@ const getMovieDetails = (movieIds) => movieIds.map(async (id) => {
 
 export default {
       async fetchMovies({ commit }, query) {
+
         try {
           commit('setLoading', true);
+          const auth = `Bearer ${API_KEY}`
           const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
             headers: {
-              Authorization: `Bearer ${API_KEY} `
+              Authorization: `${auth}`
             },
             params: {
               query: query

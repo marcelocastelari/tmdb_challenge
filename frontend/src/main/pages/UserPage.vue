@@ -108,6 +108,7 @@ const searchMovies = async () => {
 
 onMounted(() => {
   getMoviesByList();
+  return process.env.VUE_APP_API_KEY
 });
 </script>
 

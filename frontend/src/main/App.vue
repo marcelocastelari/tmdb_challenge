@@ -4,7 +4,7 @@
 
 <script>
 import 'vue3-toastify/dist/index.css';
-import { onMounted } from 'vue';
+import { onMounted  } from 'vue';
 
 export default {
   name: 'App',
@@ -12,9 +12,10 @@ export default {
   }
 }
 
-onMounted(() => {
-  return process.env.API_KEY;
+onMounted(async () => {
+  return process.env.VUE_APP_API_KEY;
 })
+
 
 
 </script>
