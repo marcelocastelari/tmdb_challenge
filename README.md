@@ -1,4 +1,4 @@
-tmdb_challenge# TMDB Challenge
+# TMDB Challenge
 
 ## Objetivo
 
@@ -12,6 +12,11 @@ Os dados do usuário são salvos no banco de dados assim como alguns dados espec
 
 ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 
+# Importante
+
+Para que a api que faz a busca aos filmes (https://developer.themoviedb.org/reference/intro/getting-started) funcione, é necessário ter a **API_KEY** fornecida aos desenvolvedores cadastrados no referido site.
+
+A **API_KEY** pode ser passada pelos environments do **docker-compose.yml - [service - frontend]** ou via arquivo **.env**
 
 ## Setup do Projeto
 
