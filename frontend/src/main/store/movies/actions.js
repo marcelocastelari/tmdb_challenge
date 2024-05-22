@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDRhM2Q0ODE4OWY5NTU5YWU1ZmY3OTY3ODY0ZWI2NiIsInN1YiI6IjY2NDkzM2I1M2Y0NGRjNWUzNzc4YzQ4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tTIkGGKZfD6MjDdypKUPNxU8K2qycT9f67zbbsoKKwQ'
+const API_KEY = process.env.VUE_APP_API_KEY || 'api_key';
 
 const getJwt = () => {
   const jwt = localStorage.getItem('token');
