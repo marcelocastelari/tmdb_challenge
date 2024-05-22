@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_KEY = process.env.VUE_APP_API_KEY || 'api_key';
+const PORT = process.env.PORT || 8000;
 
 const getJwt = () => {
   const jwt = localStorage.getItem('token');
@@ -61,7 +62,7 @@ export default {
           const body = { movie, listType: 'favorite' };
 
           const config = { headers: { Authorization: `Bearer ${token}` } };
-          const response = await axios.post('http://localhost:8000/userMovieList/add', body, config)
+          const response = await axios.post(`http://localhost:${PORT}/userMovieList/add`, body, config)
           return response.data;
         } catch (error) {
           return error;
@@ -79,7 +80,7 @@ export default {
           const body = { movie, listType: 'watchLater' };
 
           const config = { headers: { Authorization: `Bearer ${token}` } };
-          const response = await axios.post('http://localhost:8000/userMovieList/add', body, config)
+          const response = await axios.post(`http://localhost:${PORT}/userMovieList/add`, body, config)
           return response.data;
         } catch (error) {
           return error;
@@ -97,7 +98,7 @@ export default {
           const body = { movie, listType: 'watched' };
 
           const config = { headers: { Authorization: `Bearer ${token}` } };
-          const response = await axios.post('http://localhost:8000/userMovieList/add', body, config)
+          const response = await axios.post(`http://localhost:${PORT}/userMovieList/add`, body, config)
           return response.data;
         } catch (error) {
           return error;
@@ -115,7 +116,7 @@ export default {
           const config = { headers: { Authorization: `Bearer ${token}` } };
       
           const promises = listTypes.map(async (listType) => {
-            const response = await axios.get(`http://localhost:8000/userMovieList/${listType}`, config);
+            const response = await axios.get(`http://localhost:${PORT}/userMovieList/${listType}`, config);
             const movieIds = response.data;
       
             const movieDetailsPromises = getMovieDetails(movieIds);

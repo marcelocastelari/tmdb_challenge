@@ -1,10 +1,11 @@
 import axios from 'axios';
+const PORT = process.env.PORT || 8000;
 
 
 export default {
   async register({ commit }, { email, password }) {
     try {
-        const response = await axios.post('http://localhost:8000/auth/register', {
+        const response = await axios.post(`http://localhost:${PORT}/auth/register`, {
             email,
             password
         });
@@ -25,7 +26,7 @@ export default {
   },
   async login({ commit }, { email, password }) {
       try {
-        const response = await axios.post('http://localhost:8000/auth/login', {
+        const response = await axios.post(`http://localhost:${PORT}/auth/login`, {
           email,
           password
         });
